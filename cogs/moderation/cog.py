@@ -73,6 +73,10 @@ class Moderation(commands.Cog):
 
             try:
                 raw['blacklist'].remove(content)
+
+                with open("cogs\\moderation\\data.json" , "w") as fp:
+                    json.dump(raw , fp)
+                    
                 em = discord.Embed(title="Message Whitelisted" , description=f"{ctx.author.mention} whitelisted '{content}'" , color=discord.Color.green())
                 await log(self.bot , em)
                 await ctx.send(f"Whitelisted ||{content}||.")
