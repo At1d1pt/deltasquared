@@ -1,1 +1,1 @@
-{"ping": {"response": "Pong!", "creator": 650266849652768771}}
+{"whome": {"response": "User Name: <user.name>#<user.tag>\nMention: <user.mention>\nAvatar: <user.avatar_url>", "creator": 650266849652768771}, "members": {"response": "This server has `<guild.members>` members!", "creator": 650266849652768771}}
