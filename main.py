@@ -3,12 +3,12 @@ from discord.ext import commands
 
 from pretty_help import PrettyHelp
 
-from cogs import fun , moderation , tags
+from cogs import fun , moderation , tags , autoresponse
 
 from config import TOKEN , PREFIX
 
 bot = commands.Bot(command_prefix=PREFIX, help_command=PrettyHelp(color=discord.Color.from_rgb(35,32,52) , no_category="Help"))
-cogs = [fun , moderation , tags]
+cogs = [fun , moderation , tags , autoresponse]
 
 for cog in cogs:
     cog.setup(bot)
