@@ -64,6 +64,28 @@ class AutoResponse(commands.Cog):
 
         await ctx.send(embed=em)
 
+    @commands.command()
+    @commands.has_permissions(manage_messages=True)
+    async def delete_ar(self , ctx , name=None):
+        '''
+        Delete an autoresponse
+        '''
+        if name is None:
+            await ctx.reply(":x: Missing required parameter `name`.\n```\n[p]delete_ar [name]\n```" , mention_author = False)
+        else:
+            ars = await self.get_autoresponses()
+
+            try:
+                del ars[name]
+
+                with open("cogs\\autoresponse\\data.json" , "w") as f:
+                    json.dump(ars , f)
+
+                await ctx.send("Deleted autoresponse `{}`".format(name))
+
+            except:
+                await ctx.send(f":x: Autoresponse with trigger `{name}` does not exist.")
+
     @commands.Cog.listener()
     async def on_message(self , msg: discord.Message):
         if msg.author.id == self.bot.user.id:
@@ -94,3 +116,13 @@ class AutoResponse(commands.Cog):
                     
                     await msg.reply(response , mention_author=False)
                     break
+
+    @delete_ar.error
+    async def delete_ar_error(self , ctx , error):
+        if isinstance(error , commands.MissingPermissions):
+            await ctx.send(":x: You must have `manage_messages` permission to run this command.")
+
+    @create_ar.error
+    async def create_ar_error(self , ctx , error):
+        if isinstance(error , commands.MissingPermissions):
+            await ctx.send(":x: You must have `manage_messages` permission to run this command.")
