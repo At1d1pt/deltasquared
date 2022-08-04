@@ -17,6 +17,7 @@ for cog in cogs:
 @bot.event
 async def on_ready():
     await bot.change_presence(status=discord.Status.dnd , activity=discord.Activity(name=f">help" , type=discord.ActivityType.competing))
+    print(f"Loaded {len(bot.commands)} commands from {len(bot.cogs)} cogs")
     print("Logged in")
 
 bot.run(TOKEN)
